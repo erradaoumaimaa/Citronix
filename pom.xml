@@ -17,6 +17,9 @@
 
     <properties>
         <java.version>17</java.version>
+        <mapstruct.version>1.5.3.Final</mapstruct.version>
+        <liquibase.version>4.26.0</liquibase.version>
+        <postgresql.version>42.7.4</postgresql.version>
         <maven.build.timestamp.format>dd-MM</maven.build.timestamp.format>
     </properties>
 
@@ -50,10 +53,12 @@
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
             <scope>runtime</scope>
+            <version>${postgresql.version}</version>
         </dependency>
         <dependency>
             <groupId>org.liquibase</groupId>
             <artifactId>liquibase-core</artifactId>
+            <version>${liquibase.version}</version>
         </dependency>
 
         <!-- Utility Dependencies -->
@@ -65,12 +70,12 @@
         <dependency>
             <groupId>org.mapstruct</groupId>
             <artifactId>mapstruct</artifactId>
-            <version>1.5.3.Final</version>
+            <version>${mapstruct.version}</version>
         </dependency>
         <dependency>
             <groupId>org.mapstruct</groupId>
             <artifactId>mapstruct-processor</artifactId>
-            <version>1.5.3.Final</version>
+            <version>${mapstruct.version}</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
@@ -82,44 +87,29 @@
 
     <build>
         <plugins>
-            <!-- Liquibase Plugin -->
             <plugin>
                 <groupId>org.liquibase</groupId>
                 <artifactId>liquibase-maven-plugin</artifactId>
-                <version>4.26.0</version>
+                <version>${liquibase.version}</version>
                 <configuration>
-                    <changeLogFile>src/main/resources/db/changelog/${maven.build.timestamp}-changelog.yaml</changeLogFile>
                     <driver>org.postgresql.Driver</driver>
                     <url>jdbc:postgresql://localhost:5432/citronix_db</url>
                     <username>postgres</username>
                     <password>admin</password>
+                    <changeLogFile>src/main/resources/db/changelog/db.changelog-master.yaml</changeLogFile>
+                    <diffChangeLogFile>src/main/resources/db/changelog/changes/${diff.version}_changelog.yaml</diffChangeLogFile>
+                    <referenceUrl>hibernate:spring:com.oumaima.citronix.model?dialect=org.hibernate.dialect.PostgreSQLDialect</referenceUrl>
+                    <outputChangeLogFile>src/main/resources/db/changelog/auto-generated-changelog.yaml</outputChangeLogFile>
+                    <verbose>true</verbose>
+                    <logLevel>info</logLevel>
                 </configuration>
                 <dependencies>
                     <dependency>
                         <groupId>org.liquibase.ext</groupId>
                         <artifactId>liquibase-hibernate6</artifactId>
-                        <version>4.26.0</version>
+                        <version>${liquibase.version}</version>
                     </dependency>
                 </dependencies>
-            </plugin>
-
-            <!-- Build Helper Plugin -->
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>build-helper-maven-plugin</artifactId>
-                <version>3.3.0</version>
-                <executions>
-                    <execution>
-                        <id>add-timestamp</id>
-                        <goals>
-                            <goal>timestamp-property</goal>
-                        </goals>
-                        <configuration>
-                            <name>maven.build.timestamp</name>
-                            <pattern>dd-MM</pattern>
-                        </configuration>
-                    </execution>
-                </executions>
             </plugin>
         </plugins>
     </build>

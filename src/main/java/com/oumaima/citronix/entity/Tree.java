@@ -16,8 +16,8 @@ import java.util.UUID;
 public class Tree {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private UUID id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
 
     @Column(name = "planting_date", nullable = false, updatable = false)
     private LocalDate plantingDate;

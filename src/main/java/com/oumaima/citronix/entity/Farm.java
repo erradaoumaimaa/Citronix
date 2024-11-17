@@ -17,8 +17,8 @@ import java.util.UUID;
 public class Farm {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private UUID id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
 
     @NotBlank
     @Size(max = 100)
