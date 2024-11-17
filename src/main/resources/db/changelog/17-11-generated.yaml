@@ -1,0 +1,247 @@
+databaseChangeLog:
+- changeSet:
+    id: 1731806910928-1
+    author: oumaima (generated)
+    changes:
+    - createTable:
+        columns:
+        - column:
+            constraints:
+              nullable: false
+              primaryKey: true
+              primaryKeyName: harvests_pkey
+            name: id
+            type: UUID
+        - column:
+            constraints:
+              nullable: false
+            name: harvest_date
+            type: date
+        - column:
+            constraints:
+              nullable: false
+            name: season
+            type: VARCHAR(255)
+        - column:
+            constraints:
+              nullable: false
+            name: total_quantity
+            type: FLOAT8
+        tableName: harvests
+- changeSet:
+    id: 1731806910928-2
+    author: oumaima (generated)
+    changes:
+    - createTable:
+        columns:
+        - column:
+            constraints:
+              nullable: false
+              primaryKey: true
+              primaryKeyName: farms_pkey
+            name: id
+            type: UUID
+        - column:
+            constraints:
+              nullable: false
+            name: area
+            type: FLOAT8
+        - column:
+            constraints:
+              nullable: false
+            name: created_at
+            type: TIMESTAMP WITHOUT TIME ZONE
+        - column:
+            constraints:
+              nullable: false
+            name: location
+            type: VARCHAR(200)
+        - column:
+            constraints:
+              nullable: false
+            name: name
+            type: VARCHAR(100)
+        tableName: farms
+- changeSet:
+    id: 1731806910928-3
+    author: oumaima (generated)
+    changes:
+    - createTable:
+        columns:
+        - column:
+            constraints:
+              nullable: false
+              primaryKey: true
+              primaryKeyName: fields_pkey
+            name: id
+            type: UUID
+        - column:
+            constraints:
+              nullable: false
+            name: area
+            type: FLOAT8
+        - column:
+            constraints:
+              nullable: false
+            name: farm_uuid
+            type: UUID
+        tableName: fields
+- changeSet:
+    id: 1731806910928-4
+    author: oumaima (generated)
+    changes:
+    - createTable:
+        columns:
+        - column:
+            constraints:
+              nullable: false
+              primaryKey: true
+              primaryKeyName: harvest_details_pkey
+            name: id
+            type: UUID
+        - column:
+            constraints:
+              nullable: false
+            name: quantity
+            type: FLOAT8
+        - column:
+            name: harvest_id
+            type: UUID
+        - column:
+            name: tree_id
+            type: UUID
+        tableName: harvest_details
+- changeSet:
+    id: 1731806910928-5
+    author: oumaima (generated)
+    changes:
+    - createTable:
+        columns:
+        - column:
+            constraints:
+              nullable: false
+              primaryKey: true
+              primaryKeyName: sales_pkey
+            name: id
+            type: UUID
+        - column:
+            constraints:
+              nullable: false
+            name: client
+            type: VARCHAR(255)
+        - column:
+            constraints:
+              nullable: false
+            name: sale_date
+            type: date
+        - column:
+            constraints:
+              nullable: false
+            name: unit_price
+            type: FLOAT8
+        - column:
+            constraints:
+              nullable: false
+            name: harvest_uuid
+            type: UUID
+        tableName: sales
+- changeSet:
+    id: 1731806910928-6
+    author: oumaima (generated)
+    changes:
+    - createTable:
+        columns:
+        - column:
+            constraints:
+              nullable: false
+              primaryKey: true
+              primaryKeyName: trees_pkey
+            name: id
+            type: UUID
+        - column:
+            constraints:
+              nullable: false
+            name: planting_date
+            type: date
+        - column:
+            constraints:
+              nullable: false
+            name: field_uuid
+            type: UUID
+        tableName: trees
+- changeSet:
+    id: 1731806910928-7
+    author: oumaima (generated)
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: tree_id
+        baseTableName: harvest_details
+        constraintName: fk6ugxg6ixgthknl3cyq6egww9n
+        deferrable: false
+        initiallyDeferred: false
+        onDelete: NO ACTION
+        onUpdate: NO ACTION
+        referencedColumnNames: id
+        referencedTableName: trees
+        validate: true
+- changeSet:
+    id: 1731806910928-8
+    author: oumaima (generated)
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: harvest_uuid
+        baseTableName: sales
+        constraintName: fk7x8xs6f5k8la7dy1valbq13x4
+        deferrable: false
+        initiallyDeferred: false
+        onDelete: NO ACTION
+        onUpdate: NO ACTION
+        referencedColumnNames: id
+        referencedTableName: harvests
+        validate: true
+- changeSet:
+    id: 1731806910928-9
+    author: oumaima (generated)
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: farm_uuid
+        baseTableName: fields
+        constraintName: fkgsdhfwamv1gri40va4bvna6k1
+        deferrable: false
+        initiallyDeferred: false
+        onDelete: NO ACTION
+        onUpdate: NO ACTION
+        referencedColumnNames: id
+        referencedTableName: farms
+        validate: true
+- changeSet:
+    id: 1731806910928-10
+    author: oumaima (generated)
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: field_uuid
+        baseTableName: trees
+        constraintName: fki1gbsejbp0ae5wupd635lphqh
+        deferrable: false
+        initiallyDeferred: false
+        onDelete: NO ACTION
+        onUpdate: NO ACTION
+        referencedColumnNames: id
+        referencedTableName: fields
+        validate: true
+- changeSet:
+    id: 1731806910928-11
+    author: oumaima (generated)
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: harvest_id
+        baseTableName: harvest_details
+        constraintName: fko0l1tx3isieki7cn2pk4w7hmx
+        deferrable: false
+        initiallyDeferred: false
+        onDelete: NO ACTION
+        onUpdate: NO ACTION
+        referencedColumnNames: id
+        referencedTableName: harvests
+        validate: true
+
