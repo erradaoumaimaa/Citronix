@@ -89,14 +89,11 @@
                 <version>4.26.0</version>
                 <configuration>
                     <changeLogFile>src/main/resources/db/changelog/${maven.build.timestamp}-changelog.yaml</changeLogFile>
-                    <outputChangeLogFile>src/main/resources/db/changelog/${maven.build.timestamp}-generated.yaml</outputChangeLogFile>
                     <driver>org.postgresql.Driver</driver>
                     <url>jdbc:postgresql://localhost:5432/citronix_db</url>
                     <username>postgres</username>
                     <password>admin</password>
-                    <author>oumaima</author>
                 </configuration>
-
                 <dependencies>
                     <dependency>
                         <groupId>org.liquibase.ext</groupId>
@@ -115,10 +112,10 @@
                     <execution>
                         <id>add-timestamp</id>
                         <goals>
-                            <goal>parse-version</goal>
+                            <goal>timestamp-property</goal>
                         </goals>
                         <configuration>
-                            <propertyName>maven.build.timestamp</propertyName>
+                            <name>maven.build.timestamp</name>
                             <pattern>dd-MM</pattern>
                         </configuration>
                     </execution>
@@ -126,4 +123,5 @@
             </plugin>
         </plugins>
     </build>
+
 </project>
