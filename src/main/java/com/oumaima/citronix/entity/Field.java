@@ -6,7 +6,6 @@ import jakarta.validation.constraints.Positive;
 import lombok.*;
 
 import java.util.List;
-import java.util.UUID;
 
 @Builder
 @AllArgsConstructor
@@ -18,15 +17,15 @@ import java.util.UUID;
 public class Field {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private UUID id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
 
     @Positive
     @DecimalMin(value = "0.1", inclusive = true)
     private double area;
 
     @ManyToOne
-    @JoinColumn(name = "farm_uuid", nullable = false)
+    @JoinColumn(name = "farm_id", nullable = false)
     private Farm farm;
 
     @OneToMany(mappedBy = "field", cascade = CascadeType.ALL)

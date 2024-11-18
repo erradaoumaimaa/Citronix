@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;
-import java.util.UUID;
+
 
 @Builder
 @AllArgsConstructor
@@ -16,8 +16,8 @@ import java.util.UUID;
 public class Tree {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private UUID id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
 
     @Column(name = "planting_date", nullable = false, updatable = false)
     private LocalDate plantingDate;
@@ -26,7 +26,7 @@ public class Tree {
     private int age;
 
     @ManyToOne
-    @JoinColumn(name = "field_uuid", nullable = false)
+    @JoinColumn(name = "field_id", nullable = false)
     private Field field;
 
 }

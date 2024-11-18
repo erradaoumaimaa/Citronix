@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import lombok.*;
 
-import java.util.UUID;
+
 
 @Builder
 @AllArgsConstructor
@@ -15,8 +15,8 @@ import java.util.UUID;
 @Table(name = "harvestDetails")
 public class HarvestDetail {
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private UUID id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
 
     @Positive
     private double quantity;

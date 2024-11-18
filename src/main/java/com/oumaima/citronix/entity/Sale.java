@@ -6,7 +6,6 @@ import jakarta.validation.constraints.Positive;
 import lombok.*;
 
 import java.time.LocalDate;
-import java.util.UUID;
 
 @Builder
 @AllArgsConstructor
@@ -18,8 +17,8 @@ import java.util.UUID;
 public class Sale {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private UUID id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
 
     @Positive
     private double unitPrice;
@@ -37,7 +36,7 @@ public class Sale {
     }
 
     @ManyToOne
-    @JoinColumn(name = "harvest_uuid", nullable = false)
+    @JoinColumn(name = "harvest_id", nullable = false)
     private Harvest harvest;
 
 }

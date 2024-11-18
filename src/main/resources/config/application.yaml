@@ -1,18 +1,19 @@
 spring:
-  application:
-    name: citronix
-
-  # PostgreSQL Database Configuration
-  datasource:
-    url: jdbc:postgresql://localhost:5432/citronix_db
-    username: postgres
-    password: admin
-    driver-class-name: org.postgresql.Driver
-
-  # JPA / Hibernate Configuration
   jpa:
     hibernate:
-      ddl-auto: none
+      ddl-auto: update
+    properties:
+      hibernate:
+        default_schema: public
+        format_sql: true
     show-sql: true
 
-# Liquibase Configuration
+  datasource:
+    username: postgres
+    password: admin
+    url: jdbc:postgresql://localhost:5432/citronix_db
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      maximum-pool-size: 10
+server:
+  port: 8081
