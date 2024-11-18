@@ -24,7 +24,7 @@ public class Harvest {
     @Column(name = "season", nullable = false)
     private Season season;
 
-    @Column(name = "harvest_Date", nullable = false, updatable = false)
+    @Column(name = "harvest_date", nullable = false, updatable = false)
     private LocalDate harvestDate;
 
     @PositiveOrZero
