@@ -8,11 +8,9 @@ import org.mapstruct.*;
 @Mapper(componentModel = "spring")
 public  interface FarmMapper {
 
-  // Mapper Farm -> FarmResponseDto
-    FarmResponseDto farmToFarmResponseDto(Farm farm);
+  FarmResponseDTO farmToFarmResponseDto(Farm farm);
 
-    @Mapping(target = "id", ignore = true)
-    // Mapper FarmRequestDTO -> Farm
-    Farm farmRequestDtoToFarm(FarmRequestDTO farmRequestDto);
+  @Mapping(target = "id", ignore = true)
+  Farm createFarmFromFarmRequestDto(FarmRequestDTO farmRequestDto);
 
 }

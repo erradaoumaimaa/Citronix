@@ -20,5 +20,5 @@ public class FarmRequestDTO {
     @Positive(message = "Superficie positive.")
     @DecimalMin(value = "0.1", inclusive = true, message = "Min 0.1 hectare.")
     @DecimalMax(value = "10000.0", inclusive = true, message = "Max 10000 hectares.")
-    private double area;
+    private double totalarea;
 }

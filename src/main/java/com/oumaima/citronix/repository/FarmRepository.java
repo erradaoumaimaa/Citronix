@@ -2,9 +2,13 @@ package com.oumaima.citronix.repository;
 
 import com.oumaima.citronix.entity.Farm;
 import org.springframework.data.jpa.repository.JpaRepository;
+import java.util.List;
+import java.util.Optional;
 
-import java.util.UUID;
+public interface FarmRepository extends JpaRepository<Farm, Long> {
 
-public interface FarmRepository extends JpaRepository<Farm, UUID> {
+    Optional<Farm> findByName(String name);
 
+    Optional<Farm> findById(Long id);
+    List<Farm> findByLocation(String location);
 }

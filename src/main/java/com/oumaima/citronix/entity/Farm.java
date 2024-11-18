@@ -5,7 +5,6 @@ import jakarta.validation.constraints.*;
 import lombok.*;
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.UUID;
 
 @Builder
 @AllArgsConstructor
@@ -17,7 +16,8 @@ import java.util.UUID;
 public class Farm {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "farm_seq")
+    @SequenceGenerator(name = "farm_seq", sequenceName = "public.farms_seq", allocationSize = 1)
     private Long id;
 
     @NotBlank
@@ -31,7 +31,7 @@ public class Farm {
     @Positive
     @DecimalMin(value = "0.1", inclusive = true)
     @DecimalMax(value = "10000.0", inclusive = true)
-    private double area;
+    private double totalarea;
 
     @Column(name = "created_at", nullable = false, updatable = false)
     private LocalDateTime createdAt;

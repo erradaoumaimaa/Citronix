@@ -1,0 +1,8 @@
+changeLogFile: src/main/resources/db/changelog/db.changelog-master.yaml
+driver: org.postgresql.Driver
+url: jdbc:postgresql://localhost:5432/citronix_db
+
+username: postgres
+password: admin
+
+referenceUrl: hibernate:spring:com.oumaima.citronix.entity?dialect=org.hibernate.dialect.PostgreSQLDialect
