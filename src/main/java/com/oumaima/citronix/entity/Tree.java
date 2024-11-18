@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;
-import java.util.UUID;
+
 
 @Builder
 @AllArgsConstructor
@@ -26,7 +26,7 @@ public class Tree {
     private int age;
 
     @ManyToOne
-    @JoinColumn(name = "field_uuid", nullable = false)
+    @JoinColumn(name = "field_id", nullable = false)
     private Field field;
 
 }

@@ -6,7 +6,6 @@ import jakarta.validation.constraints.Positive;
 import lombok.*;
 
 import java.util.List;
-import java.util.UUID;
 
 @Builder
 @AllArgsConstructor
@@ -26,7 +25,7 @@ public class Field {
     private double area;
 
     @ManyToOne
-    @JoinColumn(name = "farm_uuid", nullable = false)
+    @JoinColumn(name = "farm_id", nullable = false)
     private Farm farm;
 
     @OneToMany(mappedBy = "field", cascade = CascadeType.ALL)

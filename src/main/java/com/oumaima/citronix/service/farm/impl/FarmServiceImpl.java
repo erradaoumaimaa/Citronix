@@ -26,7 +26,7 @@ public class FarmServiceImpl implements FarmService {
     }
     @Override
     public FarmResponseDTO create(FarmRequestDTO farmRequestDTO) {
-        Optional<Farm> existe = farmRepository.findByName(farmRequestDTO.getName());
+        Optional<Farm> existe = farmRepository.findByName(farmRequestDTO.name());
         if (existe.isPresent()) {
             throw new RuntimeException("Farm already exists");
         }
@@ -38,27 +38,16 @@ public class FarmServiceImpl implements FarmService {
 
     @Override
     public FarmResponseDTO update(Long id, FarmRequestDTO farmRequestDTO) {
-        Optional<Farm> existe = farmRepository.findById(id);
+        Farm farmToUpdate = farmRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Farm not exists"));
 
-        if (existe.isEmpty()) {
-            throw new RuntimeException("Farm not exists");
-        }
-
-        Farm farmToUpdate = existe.get();
-
-        farmToUpdate.setName(farmRequestDTO.getName());
-        farmToUpdate.setLocation(farmRequestDTO.getLocation());
-        farmToUpdate.setTotalarea(farmRequestDTO.getTotalarea());
+        farmMapper.updateFarmFromDto(farmRequestDTO, farmToUpdate);
 
         Farm updatedFarm = farmRepository.save(farmToUpdate);
 
-        return new FarmResponseDTO(
-                updatedFarm.getId(),
-                updatedFarm.getName(),
-                updatedFarm.getLocation(),
-                updatedFarm.getTotalarea()
-        );
+        return farmMapper.farmToFarmResponseDto(updatedFarm);
     }
+
 
     @Override
     public void delete(Long id) {

@@ -16,8 +16,7 @@ import java.util.List;
 public class Farm {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "farm_seq")
-    @SequenceGenerator(name = "farm_seq", sequenceName = "public.farms_seq", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @NotBlank

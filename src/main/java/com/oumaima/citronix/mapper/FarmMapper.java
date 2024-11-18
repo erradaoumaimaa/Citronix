@@ -6,11 +6,17 @@ import com.oumaima.citronix.entity.Farm;
 import org.mapstruct.*;
 
 @Mapper(componentModel = "spring")
-public  interface FarmMapper {
+public interface FarmMapper {
+
 
   FarmResponseDTO farmToFarmResponseDto(Farm farm);
 
-  @Mapping(target = "id", ignore = true)
+  @Mappings({
+          @Mapping(target = "id", ignore = true)
+  })
   Farm createFarmFromFarmRequestDto(FarmRequestDTO farmRequestDto);
 
+  @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
+  void updateFarmFromDto(FarmRequestDTO dto, @MappingTarget Farm entity);
 }
+

@@ -6,7 +6,6 @@ import jakarta.validation.constraints.Positive;
 import lombok.*;
 
 import java.time.LocalDate;
-import java.util.UUID;
 
 @Builder
 @AllArgsConstructor
@@ -37,7 +36,7 @@ public class Sale {
     }
 
     @ManyToOne
-    @JoinColumn(name = "harvest_uuid", nullable = false)
+    @JoinColumn(name = "harvest_id", nullable = false)
     private Harvest harvest;
 
 }
