@@ -25,7 +25,7 @@ public class FarmServiceImpl implements FarmService {
         this.farmMapper = farmMapper;
     }
     @Override
-    public FarmResponseDTO create(FarmRequestDTO farmRequestDTO) {
+    public FarmResponseDTO save(FarmRequestDTO farmRequestDTO) {
         Optional<Farm> existe = farmRepository.findByName(farmRequestDTO.name());
         if (existe.isPresent()) {
             throw new RuntimeException("Farm already exists");

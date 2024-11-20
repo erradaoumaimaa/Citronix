@@ -11,8 +11,5 @@ import java.util.Optional;
 public interface FarmRepository extends JpaRepository<Farm, Long> {
 
     Optional<Farm> findByName(String name);
-
-    Optional<Farm> findById(Long id);
-
     List<Farm> findByLocation(String location);
 }

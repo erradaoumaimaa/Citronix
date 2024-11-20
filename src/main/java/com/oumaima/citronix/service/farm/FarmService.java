@@ -7,7 +7,7 @@ import org.springframework.data.domain.Pageable;
 
 public interface FarmService {
 
-    FarmResponseDTO create(FarmRequestDTO farmRequestDTO);
+    FarmResponseDTO save(FarmRequestDTO farmRequestDTO);
 
     FarmResponseDTO update(Long id, FarmRequestDTO farmRequestDTO);
 
