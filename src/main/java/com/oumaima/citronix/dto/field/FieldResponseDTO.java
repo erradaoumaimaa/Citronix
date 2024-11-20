@@ -1,4 +1,7 @@
 package com.oumaima.citronix.dto.field;
 
-public record FieldResponseDTO() {
-}
+public record FieldResponseDTO(
+        Long id,
+        Double area,
+        Long farmId
+) {}

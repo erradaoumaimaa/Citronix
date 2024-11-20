@@ -1,6 +1,5 @@
 package com.oumaima.citronix.mapper;
 
-
 import com.oumaima.citronix.dto.farm.*;
 import com.oumaima.citronix.entity.Farm;
 import org.mapstruct.*;

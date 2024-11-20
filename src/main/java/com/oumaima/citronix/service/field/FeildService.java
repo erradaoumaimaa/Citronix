@@ -1,4 +1,4 @@
-package com.oumaima.citronix.service.field.impl;
+package com.oumaima.citronix.service.field;
 
 public interface FeildService {
 }
