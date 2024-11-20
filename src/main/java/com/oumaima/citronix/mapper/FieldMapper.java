@@ -8,7 +8,6 @@ import org.mapstruct.*;
 @Mapper(componentModel = "spring")
 public interface FieldMapper {
 
-    @Mapping(source = "farm.id", target = "farmId")
     FieldResponseDTO fieldToResponseDTO(Field field);
 
     @Mappings({
