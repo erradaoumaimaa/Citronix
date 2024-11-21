@@ -1,15 +1,12 @@
 package com.oumaima.citronix.controller.farm;
 
 
-import com.oumaima.citronix.dto.farm.FarmRequestDTO;
-import com.oumaima.citronix.dto.farm.FarmResponseDTO;
+import com.oumaima.citronix.dto.farm.*;
 import com.oumaima.citronix.service.farm.FarmService;
 import com.oumaima.citronix.utils.validation.OnCreate;
 import jakarta.validation.Valid;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.data.domain.*;
+import org.springframework.http.*;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,12 +20,12 @@ public class FarmController {
     public FarmController(FarmService farmService) {
         this.farmService = farmService;
     }
-    @PostMapping("/create")
-    public ResponseEntity<FarmResponseDTO> create(@RequestBody @Validated(OnCreate.class) FarmRequestDTO farmRequestDTO) {
-        FarmResponseDTO createdFarm = farmService.create(farmRequestDTO);
+    @PostMapping("/save")
+    public ResponseEntity<FarmResponseDTO> save(@RequestBody @Validated(OnCreate.class) FarmRequestDTO farmRequestDTO) {
+        FarmResponseDTO createdFarm = farmService.save(farmRequestDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdFarm);
     }
-@PatchMapping("/update/{farm_id}")
+@PatchMapping("{farm_id}/update")
     public ResponseEntity<FarmResponseDTO> update(
             @PathVariable Long farm_id,
             @RequestBody @Valid FarmRequestDTO farmRequestDTO) {
@@ -36,7 +33,7 @@ public class FarmController {
         return ResponseEntity.status(HttpStatus.OK).body(updateFarm);
     }
 
-    @DeleteMapping("/remove/{farm_id}")
+    @DeleteMapping("{farm_id}/remove")
     public ResponseEntity<String> delete(@PathVariable Long farm_id) {
         farmService.delete(farm_id);
         return new ResponseEntity<>("The farm was deleted successfully.", HttpStatus.NO_CONTENT);

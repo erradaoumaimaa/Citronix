@@ -1,4 +1,4 @@
 package com.oumaima.citronix.dto.harvest;
 
-public class harvestRequestDTO {
+public record harvestRequestDTO() {
 }
