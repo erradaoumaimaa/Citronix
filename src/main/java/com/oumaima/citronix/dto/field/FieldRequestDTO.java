@@ -1,8 +1,7 @@
 package com.oumaima.citronix.dto.field;
 
 import com.oumaima.citronix.utils.validation.OnCreate;
-import jakarta.validation.constraints.DecimalMin;
-import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.*;
 
 public record FieldRequestDTO(
         @Positive(message = "Superficie positive.", groups = OnCreate.class)

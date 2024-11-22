@@ -23,7 +23,7 @@ public class FieldController {
         this.fieldService = fieldService;
     }
 
-    // Corrected the @RequestBody and @PathVariable usage
+
     @PostMapping("/{farmId}/save")
     public ResponseEntity<FieldResponseDTO> save(
             @PathVariable Long farmId,
@@ -37,8 +37,8 @@ public class FieldController {
     public ResponseEntity<FieldResponseDTO> update(
             @PathVariable Long fieldId,
             @RequestBody @Valid FieldRequestDTO fieldRequestDTO) {
-        FieldResponseDTO updatedField = fieldService.update(fieldId, fieldRequestDTO);
-        return ResponseEntity.status(HttpStatus.OK).body(updatedField);
+            FieldResponseDTO updatedField = fieldService.update(fieldId, fieldRequestDTO);
+            return ResponseEntity.status(HttpStatus.OK).body(updatedField);
     }
 
     @DeleteMapping("/{fieldId}/remove")
@@ -51,8 +51,8 @@ public class FieldController {
     public ResponseEntity<Page<FieldResponseDTO>> getAll(
             @PathVariable Long farmId,
             Pageable pageable) {
-        Page<FieldResponseDTO> fields = fieldService.findAllByFarm(farmId, pageable);
-        return ResponseEntity.ok(fields);
+            Page<FieldResponseDTO> fields = fieldService.findAllByFarm(farmId, pageable);
+            return ResponseEntity.ok(fields);
     }
 
 }
