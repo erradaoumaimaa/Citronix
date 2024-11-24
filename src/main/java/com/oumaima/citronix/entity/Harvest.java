@@ -1,6 +1,4 @@
 package com.oumaima.citronix.entity;
-
-
 import com.oumaima.citronix.entity.enums.Season;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
@@ -11,8 +9,7 @@ import java.util.List;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Getter
-@Setter
+@Data
 @Entity
 @Table(name = "harvests")
 public class Harvest {
@@ -30,10 +27,15 @@ public class Harvest {
     @PositiveOrZero
     private double totalQuantity;
 
-
     @OneToMany(mappedBy = "harvest", cascade = CascadeType.ALL)
     private List<HarvestDetail> harvestDetails;
 
     @OneToMany(mappedBy = "harvest")
     private List<Sale> sales;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "field_id", nullable = false)
+    private Field field;
+
 }
+
