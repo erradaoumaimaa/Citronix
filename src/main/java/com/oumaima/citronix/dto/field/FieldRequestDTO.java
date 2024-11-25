@@ -5,6 +5,6 @@ import jakarta.validation.constraints.*;
 
 public record FieldRequestDTO(
         @Positive(message = "Superficie positive.", groups = OnCreate.class)
-        @DecimalMin(value = "0.1", inclusive = true, message = "Min 0.1 hectare.")
+        @DecimalMin(value = "0.1", inclusive = true, message = "Le Minu 0.1 hectare.")
         Double area
 ){}
