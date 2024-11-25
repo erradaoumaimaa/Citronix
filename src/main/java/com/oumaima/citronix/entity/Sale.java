@@ -29,7 +29,8 @@ public class Sale {
     @Column(name = "sale_Date", nullable = false, updatable = false)
     private LocalDate saleDate;
 
-
+    @Positive
+    private double quantity;
     @PrePersist
     protected void onCreate() {
         this.saleDate = LocalDate.now();
