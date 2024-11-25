@@ -2,11 +2,9 @@ package com.oumaima.citronix.controller.field;
 
 
 import com.oumaima.citronix.dto.field.*;
-import com.oumaima.citronix.entity.Field;
 import com.oumaima.citronix.service.field.*;
 import com.oumaima.citronix.utils.validation.OnCreate;
 import jakarta.validation.Valid;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.*;
 import org.springframework.http.*;
 import org.springframework.validation.annotation.Validated;
@@ -18,7 +16,6 @@ public class FieldController {
 
     private final FieldService fieldService;
 
-    @Autowired
     public FieldController(FieldService fieldService) {
         this.fieldService = fieldService;
     }

@@ -4,6 +4,7 @@ import com.oumaima.citronix.dto.farm.FarmRequestDTO;
 import com.oumaima.citronix.dto.farm.FarmResponseDTO;
 import com.oumaima.citronix.entity.Farm;
 import com.oumaima.citronix.exception.EntityNotFoundException;
+import com.oumaima.citronix.exception.FarmNotFoundException;
 import com.oumaima.citronix.mapper.FarmMapper;
 import com.oumaima.citronix.repository.FarmRepository;
 import com.oumaima.citronix.service.farm.FarmService;
@@ -19,7 +20,6 @@ public class FarmServiceImpl implements FarmService {
     private final FarmRepository farmRepository;
     private final FarmMapper farmMapper;
 
-    @Autowired
     public FarmServiceImpl(FarmRepository farmRepository, FarmMapper farmMapper) {
         this.farmRepository = farmRepository;
         this.farmMapper = farmMapper;
@@ -64,7 +64,6 @@ public class FarmServiceImpl implements FarmService {
                 .orElseThrow(() -> new EntityNotFoundException("Farm with id " + id + " not found"));
         return farmMapper.farmToFarmResponseDto(farm);
     }
-
 
     @Override
     public Page<FarmResponseDTO> findAll(Pageable pageable) {
