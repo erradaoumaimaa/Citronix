@@ -20,7 +20,7 @@ public class FieldServiceImpl implements FieldService {
     private final FarmRepository farmRepository;
     private final FieldMapper fieldMapper;
 
-    @Autowired
+
     public FieldServiceImpl(FieldRepository fieldRepository, FarmRepository farmRepository, FieldMapper fieldMapper) {
         this.fieldRepository = fieldRepository;
         this.farmRepository = farmRepository;

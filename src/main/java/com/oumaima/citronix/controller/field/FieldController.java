@@ -18,7 +18,6 @@ public class FieldController {
 
     private final FieldService fieldService;
 
-    @Autowired
     public FieldController(FieldService fieldService) {
         this.fieldService = fieldService;
     }

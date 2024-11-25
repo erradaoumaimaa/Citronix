@@ -19,7 +19,6 @@ public class FarmServiceImpl implements FarmService {
     private final FarmRepository farmRepository;
     private final FarmMapper farmMapper;
 
-    @Autowired
     public FarmServiceImpl(FarmRepository farmRepository, FarmMapper farmMapper) {
         this.farmRepository = farmRepository;
         this.farmMapper = farmMapper;

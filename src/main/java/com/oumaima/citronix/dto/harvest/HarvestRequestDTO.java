@@ -6,5 +6,7 @@ import java.time.LocalDate;
 
 public record HarvestRequestDTO(
         @NotNull(message = "La date de récolte ne peut pas être nulle." ,groups = OnCreate.class)
-        LocalDate harvestDate
+        LocalDate harvestDate,
+         @NotNull(message = "L'identifiant du champ ne peut pas être nul.")
+         Long fieldId
 ) {}
