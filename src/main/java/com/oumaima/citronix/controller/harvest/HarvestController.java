@@ -1,11 +1,8 @@
 package com.oumaima.citronix.controller.harvest;
 
-import com.oumaima.citronix.dto.field.FieldRequestDTO;
-import com.oumaima.citronix.dto.field.FieldResponseDTO;
 import com.oumaima.citronix.dto.harvest.*;
 import com.oumaima.citronix.service.harvest.HarvestService;
 import jakarta.validation.Valid;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 
