@@ -19,11 +19,13 @@ public class HarvestServiceImpl implements HarvestService {
     private final HarvestRepository harvestRepository;
     private final HarvestMapper harvestMapper;
     private final FieldRepository fieldRepository;
+    private final TreeRepository treeRepository;
 
-    public HarvestServiceImpl(HarvestRepository harvestRepository, HarvestMapper harvestMapper, FieldRepository fieldRepository) {
+    public HarvestServiceImpl(HarvestRepository harvestRepository, HarvestMapper harvestMapper, FieldRepository fieldRepository, TreeRepository treeRepository) {
         this.harvestRepository = harvestRepository;
         this.harvestMapper = harvestMapper;
         this.fieldRepository = fieldRepository;
+        this.treeRepository = treeRepository;
     }
 
     @Override
@@ -40,10 +42,14 @@ public class HarvestServiceImpl implements HarvestService {
         }
 
         Harvest harvest = harvestMapper.createHarvestFromHarvestRequestDTO(harvestRequestDTO);
-        double totalQuantity = calculateTotalProductivity(field);
-        harvest.setTotalQuantity(totalQuantity);
         harvest.setSeason(season);
         harvest.setField(field);
+
+        List<HarvestDetail> harvestDetails = calculateProductivityDetails(harvest);
+        harvest.setHarvestDetails(harvestDetails);
+
+        double totalQuantity = calculateTotalProductivity(harvestDetails);
+        harvest.setTotalQuantity(totalQuantity);
 
         harvest = harvestRepository.save(harvest);
 
@@ -79,14 +85,24 @@ public class HarvestServiceImpl implements HarvestService {
         }
     }
 
-    private double calculateTotalProductivity(Field field) {
-        List<Tree> trees = field.getTrees();
-        if (trees == null) {
+    private double calculateTotalProductivity(List<HarvestDetail> harvestDetails) {
+        if (harvestDetails == null || harvestDetails.isEmpty()) {
             return 0.0;
         }
-        return trees.stream()
-                .mapToDouble(Tree::getAnnualProductivity)
+        return harvestDetails.stream()
+                .mapToDouble(HarvestDetail::getQuantity)
                 .sum();
+    }
+
+    private List<HarvestDetail> calculateProductivityDetails(Harvest harvest) {
+        List<Tree> trees = harvest.getField().getTrees();
+        return trees.stream()
+                .map(t -> HarvestDetail.builder()
+                        .quantity(t.getAnnualProductivity())
+                        .tree(t)
+                        .harvest(harvest)
+                        .build())
+                .toList();
     }
 
     @Override
@@ -118,4 +134,20 @@ public class HarvestServiceImpl implements HarvestService {
                 .map(harvestMapper::toResponseDTO)
                 .collect(Collectors.toList());
     }
+
+
+    public List<Harvest> getAllHarvestByYearAndSeason(int year, Season season){
+        return harvestRepository.findAll()
+                .stream()
+                .filter(h->h.getSeason().equals(season)
+                && h.getHarvestDate().getYear() == year)
+                .toList();
+
+    }
+
+
+
+
+
+
 }

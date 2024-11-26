@@ -1,5 +1,6 @@
 package com.oumaima.citronix.service.sale;
 
+import com.oumaima.citronix.dto.sale.RevenueDTO;
 import com.oumaima.citronix.dto.sale.SaleRequestDTO;
 import com.oumaima.citronix.dto.sale.SaleResponseDTO;
 
@@ -9,7 +10,7 @@ public interface SaleService {
 
     SaleResponseDTO createSale(Long harvestId, SaleRequestDTO saleRequestDTO);
 
-    List<SaleResponseDTO> getAllSales();
+    RevenueDTO getAllSales();
 
     SaleResponseDTO getSaleById(Long saleId);
 

@@ -1,5 +1,6 @@
 package com.oumaima.citronix.controller.sale;
 
+import com.oumaima.citronix.dto.sale.RevenueDTO;
 import com.oumaima.citronix.dto.sale.SaleRequestDTO;
 import com.oumaima.citronix.dto.sale.SaleResponseDTO;
 import com.oumaima.citronix.service.sale.SaleService;
@@ -29,8 +30,8 @@ public class SaleController {
 
 
     @GetMapping
-    public ResponseEntity<List<SaleResponseDTO>> getAllSales() {
-        List<SaleResponseDTO> sales = saleService.getAllSales();
+    public ResponseEntity<RevenueDTO> getAllSales() {
+        RevenueDTO sales = saleService.getAllSales();
         return new ResponseEntity<>(sales, HttpStatus.OK);
     }
 

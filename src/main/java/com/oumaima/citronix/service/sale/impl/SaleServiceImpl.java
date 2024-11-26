@@ -1,5 +1,6 @@
 package com.oumaima.citronix.service.sale.impl;
 
+import com.oumaima.citronix.dto.sale.RevenueDTO;
 import com.oumaima.citronix.dto.sale.SaleRequestDTO;
 import com.oumaima.citronix.dto.sale.SaleResponseDTO;
 import com.oumaima.citronix.entity.Harvest;
@@ -43,14 +44,14 @@ public class SaleServiceImpl implements SaleService {
         harvest.setTotalQuantity(harvest.getTotalQuantity() - saleRequestDTO.quantity());
         harvestRepository.save(harvest);
 
-        double revenue = saleRequestDTO.quantity() * saleRequestDTO.unitPrice();
-
         Sale sale = Sale.builder()
                 .client(saleRequestDTO.client())
                 .quantity(saleRequestDTO.quantity())
                 .unitPrice(saleRequestDTO.unitPrice())
                 .harvest(harvest)
                 .build();
+
+        double revenue = saleRequestDTO.quantity() * saleRequestDTO.unitPrice();
 
         saleRepository.save(sale);
 
@@ -65,20 +66,31 @@ public class SaleServiceImpl implements SaleService {
         );
     }
 
+    public double calculateRevenue(Sale sale) {
+        return sale.getUnitPrice() * sale.getQuantity();
+    }
 
+    public double calculateTotalRevenue(List<Sale> sales) {
+        if(sales == null || sales.isEmpty()) return 0;
+        return sales.stream().mapToDouble(this::calculateRevenue).sum();
+    }
+
+    public List<Sale> getAllSaleEntities() {
+        List<Sale> sales = saleRepository.findAll();
+        return sales.stream().map(s -> s.withRevenue(calculateRevenue(s))).toList();
+    }
 
     @Override
-    public List<SaleResponseDTO> getAllSales() {
-        return saleRepository.findAll().stream()
-                .map(saleMapper::toResponseDTO)
-                .collect(Collectors.toList());
+    public RevenueDTO getAllSales() {
+        List<Sale> sales = getAllSaleEntities();
+        return new RevenueDTO(calculateTotalRevenue(sales), sales.stream().map(saleMapper::toResponseDTO).toList());
     }
 
     @Override
     public SaleResponseDTO getSaleById(Long saleId) {
         Sale sale = saleRepository.findById(saleId)
                 .orElseThrow(() -> new SaleNotFoundException("Vente introuvable."));
-        return saleMapper.toResponseDTO(sale);
+        return saleMapper.toResponseDTO(sale.withRevenue(calculateRevenue(sale)));
     }
 
     @Override
@@ -87,4 +99,9 @@ public class SaleServiceImpl implements SaleService {
                 .orElseThrow(() -> new SaleNotFoundException("Vente introuvable."));
         saleRepository.delete(sale);
     }
+
+
+
+
+
 }

@@ -83,6 +83,10 @@ public class FieldServiceImpl implements FieldService {
 
 
     private void validateField(Farm farm, FieldRequestDTO fieldRequestDTO) {
+        long totalFields = farm.getFields().size();
+        if (totalFields >= 10) {
+            throw new FieldCountException("Une ferme ne peut contenir plus de 10 champs.");
+        }
 
         if (fieldRequestDTO.area() < 0.1) {
             throw new FieldAreaException("La superficie du champ doit être d'au moins 0.1 hectare.");
@@ -98,11 +102,6 @@ public class FieldServiceImpl implements FieldService {
 
         if (totalFieldArea > farm.getTotalarea()) {
             throw new FieldAreaException("La superficie totale des champs ne doit pas dépasser la superficie totale de la ferme.");
-        }
-
-        long totalFields = farm.getFields().size();
-        if (totalFields >= 10) {
-            throw new FieldCountException("Une ferme ne peut contenir plus de 10 champs.");
         }
     }
 

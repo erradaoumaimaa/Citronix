@@ -8,7 +8,10 @@ import com.oumaima.citronix.repository.*;
 import com.oumaima.citronix.service.tree.TreeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.time.LocalDate;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class TreeServiceImpl implements TreeService {
@@ -88,4 +91,9 @@ public class TreeServiceImpl implements TreeService {
     public void delete(Long treeId) {
             treeRepository.deleteById(treeId);
     }
+
+
+
+
+
 }

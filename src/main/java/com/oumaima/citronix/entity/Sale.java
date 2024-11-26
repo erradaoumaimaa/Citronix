@@ -23,14 +23,21 @@ public class Sale {
     @Positive
     private double unitPrice;
 
+    @Transient
+    @With
+    private double revenue;
+
     @NotBlank
+    @NonNull
     private String client;
 
     @Column(name = "sale_Date", nullable = false, updatable = false)
     private LocalDate saleDate;
 
     @Positive
+    @NonNull
     private double quantity;
+
     @PrePersist
     protected void onCreate() {
         this.saleDate = LocalDate.now();
@@ -38,6 +45,7 @@ public class Sale {
 
     @ManyToOne
     @JoinColumn(name = "harvest_id", nullable = false)
+    @NonNull
     private Harvest harvest;
 
 }

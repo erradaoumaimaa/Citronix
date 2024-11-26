@@ -26,4 +26,6 @@ public interface TreeRepository extends JpaRepository<Tree, Long> {
 
     @Query("SELECT t FROM Tree t WHERE t.plantingDate >= :minDate")
     List<Tree> findAllProductiveTrees(@Param("minDate") LocalDate minDate);
+
+
 }

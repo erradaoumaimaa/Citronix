@@ -18,7 +18,7 @@ public class HarvestDetail {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Positive
+    @PositiveOrZero
     private double quantity;
 
     @ManyToOne

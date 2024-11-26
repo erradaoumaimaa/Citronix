@@ -20,6 +20,8 @@
         <mapstruct.version>1.5.3.Final</mapstruct.version>
         <postgresql.version>42.7.4</postgresql.version>
         <springboot.version>3.3.5</springboot.version>
+        <mockito.version>5.3.1</mockito.version>
+        <junit.version>5.8.1</junit.version>
     </properties>
 
     <dependencies>
@@ -82,6 +84,25 @@
             <groupId>org.springdoc</groupId>
             <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
             <version>2.2.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-engine</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-junit-jupiter</artifactId>
+            <version>${mockito.version}</version>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 
